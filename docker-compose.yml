@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+    ruby:
+        build: ./ruby
+        volumes:
+            - app-volume:/usr/src/app
+        ports:
+            - 3000:3000
+        networks:
+            - ${NETWORK}
+        restart: "no"
+
+networks:
+    ruby_network:
+        name: ${NETWORK}
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: ${SUBNET}
+
+volumes:
+    app-volume:
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: ${CONTAINER_PATH}/${SITE_DIR}
