@@ -10,6 +10,7 @@ RUN apk add --update \
         bash \
         build-base \
         tzdata \
+        sqlite \
         git && \
       gem install bundler && \
       addgroup -g $APP_GROUP_GID -S $APP_GROUP && \
@@ -29,7 +30,7 @@ RUN bundle install
 
 USER $APP_USER
 
-COPY --chown=$APP_USER:$APP_GROUP . $APP_PATH/
+COPY --chown=$APP_USER:$APP_GROUP Gemfile* $APP_PATH/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
