@@ -4,7 +4,7 @@ services:
     ruby:
         build: ./ruby
         volumes:
-            - app-volume:/usr/src/app
+            - ${CONTAINER_PATH}/${SITE_DIR}:/usr/src/app
         ports:
             - 3000:3000
         networks:
@@ -20,10 +20,7 @@ networks:
             config:
                 - subnet: ${SUBNET}
 
-volumes:
-    app-volume:
-        driver: local
-        driver_opts:
-            o: bind
-            type: none
-            device: ${CONTAINER_PATH}/${SITE_DIR}
+#volumes:
+    #app-v#olume:
+        #driver: local
+#        mountpoint: ${CONTAINER_PATH}/${SITE_DIR}
