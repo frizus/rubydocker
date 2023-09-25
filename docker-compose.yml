@@ -12,12 +12,12 @@ services:
         volumes:
             - app-volume:/usr/src/app
         ports:
-            - 3000:3000
+            - "3000:3000"
         networks:
             - ${NETWORK}
         restart: "no"
-        tty: true
-        stdin_open: true
+        #tty: true
+        #stdin_open: true
 
 networks:
     ruby_network:
@@ -32,6 +32,6 @@ volumes:
     app-volume:
         driver: local
         driver_opts:
-            o: bind
             type: none
-            device: ${CONTAINER_PATH}/${SITE_DIR}
+            o: bind
+            device: ./${SITE_DIR}
