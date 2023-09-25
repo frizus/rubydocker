@@ -1,5 +1,7 @@
 version: "3.8"
 
+# отладка: docker container attach ruby-ruby-1
+# curl -X POST http://localhost:3000/questions
 services:
     ruby:
         build:
@@ -8,6 +10,7 @@ services:
             args:
                 - APP_USER_UID=${APP_USER_UID}
                 - APP_GROUP_GID=${APP_GROUP_GID}
+        working_dir: /usr/src/app
         command: bash -c "rm -f /tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
         volumes:
             - app-volume:/usr/src/app
@@ -16,8 +19,8 @@ services:
         networks:
             - ${NETWORK}
         restart: "no"
-        #tty: true
-        #stdin_open: true
+        tty: true
+        stdin_open: true
 
 networks:
     ruby_network:

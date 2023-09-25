@@ -11,6 +11,7 @@ RUN apk add --update \
         build-base \
         tzdata \
         sqlite \
+        curl \
         git && \
       gem install bundler && \
       addgroup -g $APP_GROUP_GID -S $APP_GROUP && \
